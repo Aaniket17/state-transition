@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Transition Diagram - Shopping Cart</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #0d102c;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #3d51f2;
+        }
+
+        .state {
+            display: none;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #1a202c;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .state.active {
+            display: block;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #3d51f2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #5670ef;
+        }
+
+        .svg-img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #8388b4;
+        }
+    </style>
+</head>
+<body>
+
+<div id="browsing" class="state active">
+    <h2>Browsing Products</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svg-img">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25a8.25 8.25 0 110 16.5 8.25 8.25 0 010-16.5zm0 0v16.5M3.75 12h16.5" />
+      </svg>
+      
+    <p>Click on a product to view details.</p>
+    <button class="button" onclick="goToState('itemSelected')">View Product</button>
+</div>
+
+<div id="itemSelected" class="state">
+    <h2>Product Details</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svg-img">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V5.25A2.25 2.25 0 018.25 3h7.5A2.25 2.25 0 0118 5.25V9m0 0h-3.75a2.25 2.25 0 01-4.5 0H6m12 0h2.25A2.25 2.25 0 0122.5 11.25v8.25A2.25 2.25 0 0120.25 22h-16.5A2.25 2.25 0 011.5 19.5V11.25A2.25 2.25 0 013.75 9H6z" />
+      </svg>
+      
+    <p>Here are the details of the selected product.</p>
+    <button class="button" onclick="goToState('itemAdded')">Add to Cart</button>
+</div>
+
+<div id="itemAdded" class="state">
+    <h2>Item Added to Cart</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svg-img">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h2.34a.75.75 0 01.728.537L7.53 9h10.894a.75.75 0 01.722.959l-1.2 4.8A.75.75 0 0117.25 15H8.25m-3.75-12l1.65 6.563m-.9 3.387a.75.75 0 010 1.5m0-1.5a.75.75 0 000 1.5m0 0A.75.75 0 106.75 18m10.5 0a.75.75 0 100-1.5m0 0a.75.75 0 110-1.5" />
+      </svg>
+      
+    <p>You have added the item to your cart.</p>
+    <button class="button" onclick="goToState('cartView')">View Cart</button>
+</div>
+
+<div id="cartView" class="state">
+    <h2>Your Cart</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svg-img">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5M3.75 15h16.5m-16.5 0h5.25a.75.75 0 00.75-.75v-2.5a.75.75 0 00-.75-.75H3.75a.75.75 0 00-.75.75v2.5a.75.75 0 00.75.75zM5.25 18v2.25m13.5-2.25V18a.75.75 0 01.75-.75h3.75a.75.75 0 01.75.75v2.25" />
+      </svg>
+      
+    <p>Here are the items in your cart.</p>
+    <button class="button" onclick="goToState('checkout')">Checkout</button>
+</div>
+
+<div id="checkout" class="state">
+    <h2>Checkout</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svg-img">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5h18M6 3v18m12-18v18m-9-7.5h6m-6 0V10.5m0 6h6M3 3v18m18-18v18" />
+      </svg>
+      
+    <p>Enter your payment and shipping details.</p>
+    <button class="button" onclick="goToState('payment')">Proceed to Payment</button>
+</div>
+
+<div id="payment" class="state">
+    <h2>Payment</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svg-img">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m2-2.25V9a6 6 0 11-6-6h2.25m3.75 0v6h6M4.5 12a7.5 7.5 0 1015 0 7.5 7.5 0 00-15 0zm7.5 9v3M9 22.5h6m-3-3h-.001m0-15.75A5.25 5.25 0 019 9m3 0a5.25 5.25 0 01-.999 10.499" />
+      </svg>
+      
+    <p>Confirm your payment details.</p>
+    <button class="button" onclick="goToState('orderConfirmation')">Confirm Order</button>
+</div>
+
+<div id="orderConfirmation" class="state">
+    <h2>Order Confirmation</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3d51f2" class="svg-img">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.75 12.75l6 6 9.5-13.5M12 21.75a9.75 9.75 0 100-19.5 9.75 9.75 0 000 19.5z" />
+        <text x="7" y="35" font-family="Poppins, sans-serif" font-size="12" fill="#3d51f2">Thank You!</text>
+      </svg>
+      
+      
+    <p>Thank you for your order!</p>
+</div>
+
+<script>
+    function goToState(state) {
+        document.querySelectorAll('.state').forEach(function (el) {
+            el.classList.remove('active');
+        });
+        document.getElementById(state).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
